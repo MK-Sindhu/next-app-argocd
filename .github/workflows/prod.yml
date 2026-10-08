@@ -30,3 +30,18 @@ jobs:
           context: .
           push: true
           tags: mksindhu/argocd:${{ github.sha }}
+      
+      - name: clone repo and update manifest.yml
+        env:
+          PAT: ${{ secrets.PAT }}
+        
+        run: |
+          git clone https://github.com/MK-Sindhu/argo-deployment
+
+          sed -i "s|image: mksindhu/argocd:.*|image: mksindhu/argocd:${{ github.sha }}|g" argo-deployment/manifest.yml
+
+          git config user.name "git actions bot"
+          git config user.email "git.actions.bot@example.com"
+          git add .
+          git commit -m "Update manifest.yml with new image version"
+          git push https://{ PAT}@github.com/MK-Sindhu/argo-deployment.git main
