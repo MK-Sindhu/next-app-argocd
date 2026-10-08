@@ -1,5 +1,7 @@
 name: Continuous Deployment
 
+# Builds the image, pushes it to Docker Hub, then bumps the tag in argo-deployment.
+
 on:
   push:
     branches:
@@ -36,7 +38,7 @@ jobs:
           PAT: ${{ secrets.PAT }}
         run: |
           git clone https://x-access-token:${PAT}@github.com/MK-Sindhu/argo-deployment.git
-          cd argo-deployment
+          cd argo-deployment 
 
           sed -i "s|image: mksindhu/argocd:.*|image: mksindhu/argocd:${{ github.sha }}|g" manifest.yml
 
