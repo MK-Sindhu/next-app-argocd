@@ -44,4 +44,4 @@ jobs:
           git config user.email "git.actions.bot@example.com"
           git add .
           git commit -m "Update manifest.yml with new image version"
-          git push https://{ PAT}@github.com/MK-Sindhu/argo-deployment.git main
+          git push https://${PAT}@github.com/MK-Sindhu/argo-deployment.git main
